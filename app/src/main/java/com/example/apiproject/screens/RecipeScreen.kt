@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -96,7 +97,10 @@ fun UserScreen(geoLocationResponse: GeoLocationResponse, userInfo: UserInfo, lis
 
 @Composable
 fun CryptoSection(listCrypto: List<Crypto>,modifier: Modifier = Modifier) {
-    LazyRow(modifier = Modifier.fillMaxWidth()) {
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
         items(listCrypto) { crypto ->
             CryptoSectionItem(crypto)
         }
@@ -113,35 +117,44 @@ fun CryptoSectionItem(cryptoBlock: Crypto) {
         fontSize = 17.sp,
         letterSpacing = 0.sp
     )
-
     Column(
         modifier = Modifier
-            .size(142.dp,134.dp)
-            .padding(10.dp, 15.dp,5.dp,10.dp)
-            .border(1.dp,Color(0xFFF2F2F2), RoundedCornerShape(15))
-        ,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .size(142.dp, 134.dp)
+            .border(1.dp, Color(0xFFF2F2F2), RoundedCornerShape(15))
+            .absolutePadding(10.dp,20.dp,5.dp,20.dp),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.Start
     ) {
-        AsyncImage(model = cryptoBlock.image, contentDescription = null , modifier = Modifier.aspectRatio(1f).size(27.dp,27.dp))
+        AsyncImage(model = cryptoBlock.image, contentDescription = null , modifier = Modifier.size(27.dp,27.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(cryptoBlock.name)
-            Text(cryptoBlock.current_price.toString())
+            Text(
+                text = cryptoBlock.name,
+                style = TextStyle(
+                    fontSize = 13.sp,
+                )
+            )
+            Text("${cryptoBlock.current_price} ${'$'}",
+                style = TextStyle(
+                    fontSize = 13.sp,
+                    color = Color(0xFF878787)
+                )
+            )
         }
         PriceChange(cryptoBlock.price_change_percentage_24h,textStyle)
     }
 }
 @Composable
-fun PriceChange(price : Double, textStyle: TextStyle) {
+fun PriceChange(price : Double, textStyle: TextStyle,modifier: Modifier = Modifier) {
     return if (price>0) {
-        Text(text = "+$price%",style = textStyle, color = Color.Green)
+        Text(text = "+$price%",style = textStyle, color = Color.Green, modifier = modifier)
     } else if (price<0) {
-        Text(text = "-$price%",style = textStyle, color = Color.Red)
+        Text(text = "-$price%",style = textStyle, color = Color.Red, modifier = modifier)
     } else {
-        Text(text = "0",style = textStyle, color = Color.Black)
+        Text(text = "0",style = textStyle, color = Color.Black, modifier = modifier)
     }
 }
 
