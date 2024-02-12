@@ -1,5 +1,6 @@
 package com.example.apiproject.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -7,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.apiproject.viewModel.CryptoViewModel
 import com.example.apiproject.viewModel.ExchangeViewModel
@@ -32,7 +34,7 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
 
     val exchangeViewState by exchangeViewModel.exchangeResponse
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize().background(Color(android.graphics.Color.parseColor("#f8fcfc")))) {
         when {
             geoLocationViewState.loading && userInfoViewState.loading && cryptoViewState.loading -> {
                 CircularProgressIndicator(modifier.align(Alignment.Center))

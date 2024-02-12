@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
@@ -32,10 +33,11 @@ import com.example.apiproject.classes.Crypto
 @Composable
 fun CryptoSection(listCrypto: List<Crypto>, modifier: Modifier = Modifier) {
     LazyRow(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(listCrypto) { crypto ->
+        items(listCrypto.filter { it.market_cap_rank > 10 }) { crypto ->
             CryptoSectionItem(crypto)
         }
     }
