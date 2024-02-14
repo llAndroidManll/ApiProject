@@ -29,26 +29,20 @@ fun MainScreen(
 
     val cryptoViewState by cryptoViewModel.cryptoResponse
 
-    val exchangeViewModel: ExchangeViewModel = viewModel()
-
-    val exchangeViewState by exchangeViewModel.exchangeResponse
-
     Box(modifier = Modifier.fillMaxSize().background(Color(android.graphics.Color.parseColor("#f8fcfc")))) {
         when {
             geoLocationViewState.loading && cryptoViewState.loading -> {
                 CircularProgressIndicator(modifier.align(Alignment.Center))
             }
 
-            geoLocationViewState.error != null || cryptoViewState.error != null || exchangeViewState.error != null-> {
-                Text("Error Occurred \n ${geoLocationViewState.error.toString()}\n ${cryptoViewState.error}  \n" +
-                        " ${exchangeViewState.error}")
+            geoLocationViewState.error != null || cryptoViewState.error != null -> {
+                Text("Error Occurred \n ${geoLocationViewState.error.toString()}\n ${cryptoViewState.error}  \n")
             }
 
             else -> {
                 UserScreen(
                     geoLocationViewState.geoLocationResponse,
                     cryptoViewState.cryptoResponse,
-                    exchangeViewState.exchangeResponse,
                     { navigationToFirstScreen() },
                     { navigationToSecondScreen() }
                 )
