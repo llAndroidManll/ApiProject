@@ -1,7 +1,6 @@
 package com.example.apiproject.service
 
-import com.example.apiproject.classes.Crypto
-import com.example.apiproject.classes.CryptoResponse
+import com.example.apiproject.model.Crypto
 import retrofit2.http.GET
 
 

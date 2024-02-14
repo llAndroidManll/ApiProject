@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apiproject.classes.Crypto
+import com.example.apiproject.model.Crypto
 import com.example.apiproject.service.RetrofitClient
 import kotlinx.coroutines.launch
 

@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apiproject.classes.Currency
-import com.example.apiproject.classes.GeoLocationResponse
+import com.example.apiproject.model.Currency
+import com.example.apiproject.model.GeoLocationResponse
 import com.example.apiproject.service.RetrofitClient
 import kotlinx.coroutines.launch
 
@@ -42,7 +42,7 @@ class GeoLocationViewModel: ViewModel() {
 
     data class RecipeGeoLocationState(
         val loading: Boolean = true,
-        val geoLocationResponse: GeoLocationResponse = GeoLocationResponse(Currency("","",""),""),
+        val geoLocationResponse: GeoLocationResponse = GeoLocationResponse(Currency("","","")),
         val error: String? = null
     )
 

@@ -1,6 +1,5 @@
-package com.example.apiproject.screens
+package com.example.apiproject.screens.firstscreen
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,7 +26,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.apiproject.classes.Crypto
+import com.example.apiproject.model.Crypto
 
 @Composable
 fun TopRankedCrypto(listCrypto: List<Crypto>) {

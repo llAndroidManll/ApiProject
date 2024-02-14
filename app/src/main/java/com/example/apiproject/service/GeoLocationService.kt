@@ -1,6 +1,6 @@
 package com.example.apiproject.service
 
-import com.example.apiproject.classes.GeoLocationResponse
+import com.example.apiproject.model.GeoLocationResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

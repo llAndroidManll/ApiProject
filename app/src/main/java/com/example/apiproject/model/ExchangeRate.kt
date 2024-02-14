@@ -1,4 +1,4 @@
-package com.example.apiproject.classes
+package com.example.apiproject.model
 
 data class ExchangeRateResponse(
     val result: String = "",

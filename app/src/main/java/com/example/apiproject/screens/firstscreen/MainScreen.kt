@@ -1,4 +1,4 @@
-package com.example.apiproject.screens
+package com.example.apiproject.screens.firstscreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,18 +13,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.apiproject.viewModel.CryptoViewModel
 import com.example.apiproject.viewModel.ExchangeViewModel
 import com.example.apiproject.viewModel.GeoLocationViewModel
-import com.example.apiproject.viewModel.UserInfoViewModel
 
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier) {
+fun MainScreen(
+    navigationToFirstScreen: () -> Unit,
+    navigationToSecondScreen:()->Unit,
+    modifier: Modifier = Modifier
+) {
     val geoLocationViewModel: GeoLocationViewModel = viewModel()
 
     val geoLocationViewState by geoLocationViewModel.geoLocationResponse
-
-    val userInfoViewModel: UserInfoViewModel = viewModel()
-
-    val userInfoViewState by userInfoViewModel.userInfoResponse
 
     val cryptoViewModel: CryptoViewModel = viewModel()
 
@@ -36,17 +35,23 @@ fun RecipeScreen(modifier: Modifier = Modifier) {
 
     Box(modifier = Modifier.fillMaxSize().background(Color(android.graphics.Color.parseColor("#f8fcfc")))) {
         when {
-            geoLocationViewState.loading && userInfoViewState.loading && cryptoViewState.loading -> {
+            geoLocationViewState.loading && cryptoViewState.loading -> {
                 CircularProgressIndicator(modifier.align(Alignment.Center))
             }
 
-            geoLocationViewState.error != null || userInfoViewState.error != null || cryptoViewState.error != null || exchangeViewState.error != null-> {
-                Text("Error Occurred \n ${geoLocationViewState.error.toString()} \n ${userInfoViewState.error.toString()} \n ${cryptoViewState.error}  \n" +
+            geoLocationViewState.error != null || cryptoViewState.error != null || exchangeViewState.error != null-> {
+                Text("Error Occurred \n ${geoLocationViewState.error.toString()}\n ${cryptoViewState.error}  \n" +
                         " ${exchangeViewState.error}")
             }
 
             else -> {
-                UserScreen(geoLocationViewState.geoLocationResponse, userInfoViewState.userInfo, cryptoViewState.cryptoResponse, exchangeViewState.exchangeResponse)
+                UserScreen(
+                    geoLocationViewState.geoLocationResponse,
+                    cryptoViewState.cryptoResponse,
+                    exchangeViewState.exchangeResponse,
+                    { navigationToFirstScreen() },
+                    { navigationToSecondScreen() }
+                )
             }
         }
     }
